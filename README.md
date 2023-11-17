@@ -20,6 +20,7 @@ Setelah mengalahkan Demon King, perjalanan berlanjut. Kali ini, kalian diminta u
 
 ## **Penyelesaian Soal Nomor 0 dan 1**
 ![Alt text](image.png)
+
 Konfigurasi Interface setiap node
 ```bash
 #AURA
@@ -234,6 +235,11 @@ Hasil DHCP
 ![Alt text](image-1.png)
 
 ![Alt text](image-2.png)
+
+![image](https://github.com/akmalariq9/Jarkom-Modul-3-A17-2023/assets/91018876/3afb62d2-e15e-4cc5-a240-82b4875f6645)
+
+![image](https://github.com/akmalariq9/Jarkom-Modul-3-A17-2023/assets/91018876/9f74fb6f-a06e-4b57-af19-bd41965a800a)
+
 
 ## **Soal Nomor 6**
 Berjalannya waktu, petualang diminta untuk melakukan deployment. Pada masing-masing worker PHP, lakukan konfigurasi virtual host untuk website [berikut](https://drive.google.com/file/d/1ViSkRq7SmwZgdK64eRbr5Fm1EGCTPrU1/view) dengan menggunakan php 7.3.
