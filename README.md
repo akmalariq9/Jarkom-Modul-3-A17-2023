@@ -19,29 +19,218 @@ Berikut adalah dokumentasi yang berisi source code dari tiap soal dan penjelasan
 Setelah mengalahkan Demon King, perjalanan berlanjut. Kali ini, kalian diminta untuk melakukan register domain berupa riegel.canyon.yyy.com untuk worker Laravel dan granz.channel.yyy.com untuk worker PHP mengarah pada worker yang memiliki IP [prefix IP].x.1. Lakukan konfigurasi sesuai dengan peta yang sudah diberikan. 
 
 ## **Penyelesaian Soal Nomor 0 dan 1**
+![Alt text](image.png)
+Konfigurasi Interface setiap node
+```bash
+#AURA
+
+auto eth0
+iface eth0 inet dhcp
+up iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE -s 192.177.0.0/16
 
 
+auto eth1
+iface eth1 inet static
+	address 192.177.1.0
+	netmask 255.255.255.0
+
+auto eth2
+iface eth2 inet static
+	address 192.177.2.0
+	netmask 255.255.255.0
+
+auto eth3
+iface eth3 inet static
+	address 192.177.3.0
+	netmask 255.255.255.0
+
+auto eth4
+iface eth4 inet static
+	address 192.177.4.0
+	netmask 255.255.255.0
+
+
+#HIMMEL
+auto eth0
+iface eth0 inet static
+	address 192.177.1.1
+	netmask 255.255.255.0
+	gateway 192.177.1.0
+
+
+#HEITER
+auto eth0
+iface eth0 inet static
+	address 192.177.1.2
+	netmask 255.255.255.0
+        gateway 192.177.1.0
+
+
+#DENKEN
+auto eth0
+iface eth0 inet static
+	address 192.177.2.1
+	netmask 255.255.255.0
+	gateway 192.177.2.0
+
+#EISEN
+auto eth0
+iface eth0 inet static
+	address 192.177.2.2
+	netmask 255.255.255.0
+	gateway 192.177.2.0
+
+
+## Untuk Worker dan Client menggunakan IP Dinamis
+auto eth0
+iface eth0 inet dhcp
+hwaddress ether ea:5e:ce:cb:22: #Hanya untuk worker
+```
+
+Lalu, melakukan konfigurasi DNS seperti biasa pada DNS SERVER.
+```
+konfigurasi channel.a17.com
+;
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     channel.a17.com. root.channel.a17.com. (
+                        2022100601      ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@       IN      NS      channel.a17.com.
+@       IN      A       192.177.1.2
+granz   IN      A       192.177.3.1 #IP PHP Worker 
+@       IN      AAAA    ::1
+
+```
+```
+konfigurasi canyon.a17.com
+;
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     canyon.a17.com. root.canyon.a17.com. (
+                        2022100601      ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;modu
+@       IN      NS      canyon.a17.com.
+@       IN      A       192.177.1.2 
+riegel  IN      A       192.177.4.1 #IP Laravel Worker
+@       IN      AAAA    ::1
+```
+
+Menkonfigurasi Domain pada named.local.conf
+```
+zone "canyon.a17.com" {
+        type master;
+        file "/etc/bind/jarkom/canyon.a17.com";
+};
+
+zone "channel.a17.com" {
+        type master;
+        file "/etc/bind/jarkom/channel.a17.com";
+};
+```
 ## **Soal Nomor 2**
 Semua Client harus menggunakan konfigurasi dari DHCP Server. Client yang melalui Switch3 mendapatkan range IP dari [prefix IP].3.16 - [prefix IP].3.32 dan [prefix IP].3.64 - [prefix IP].3.80.
 
 
 ## **Penyelesaian Soal Nomor 2**
+Melakukan Konfigurasi pada DHCP Relay dan DHCP Server
+
+```bash
+#DHCP RELAY UNTUK PERTAMA KALI
+
+#Konfigurasi pada /etc/default/isc-dhcp-relay .
+SERVERS="192.177.1.1"
+
+INTERFACES="eth1 eth2 eth3 eth4"
+
+#Konfigurasi /etc/sysctl.conf .
+net.ipv4.ip_forward=1
+
+#DHCP SERVER UNTUK PERTAMA KALI
+
+#Konfigurasi pada file /etc/default/isc-dhcp-server.
+INTERFACESv4="eth0"
+INTERFACESv6=""
+
+#Konfigurasi pada dhcpd.conf untuk subnet switch 3.
+subnet 192.177.3.0 netmask 255.255.255.0 {
+    range 192.177.3.16 192.177.3.32;
+    range 192.177.3.64 192.177.3.80;
+    option routers 192.177.3.0;
+    option broadcast-address 192.177.3.255;
+    option domain-name-servers 192.177.1.2;
+    default-lease-time 180;
+    max-lease-time 5760;
+}
+```
 
 
 ## **Soal Nomor 3**
 Client yang melalui Switch4 mendapatkan range IP dari [prefix IP].4.12 - [prefix IP].4.20 dan [prefix IP].4.160 - [prefix IP].4.168.
 
 ## **Penyelesaian Soal Nomor 3**
+```bash
+#Menambahkan konfigurasi pada file /etc/dhcp/dhcpd.conf pada DHCP SERVER .
+subnet 192.177.4.0 netmask 255.255.255.0 {
+    range 192.177.4.12 192.177.4.32;
+    range 192.177.4.160 192.177.4.168;
+    option routers 192.177.4.0;
+    option broadcast-address 192.177.4.255;
+    option domain-name-servers 192.177.1.2;
+    default-lease-time 720;
+    max-lease-time 5760;
+}
+```
 
 ## **Soal Nomor 4**
 Client mendapatkan DNS dari Heiter dan dapat terhubung dengan internet melalui DNS tersebut.
 
 ## **Penyelesaian Soal Nomor 4**
+```bash
+#Menambahkan forwarders pada file konfig /etc/bind/named.conf.options 
+
+options {
+        directory "/var/cache/bind";
+
+        forwarders {
+                192.168.122.1;
+        };
+
+      // dnssec-validation auto;
+        allow-query{any;};
+        auth-nxdomain no;
+        listen-on-v6 { any; };
+};
+```
 
 ## **Soal Nomor 5**
 Lama waktu DHCP server meminjamkan alamat IP kepada Client yang melalui Switch3 selama 3 menit sedangkan pada client yang melalui Switch4 selama 12 menit. Dengan waktu maksimal dialokasikan untuk peminjaman alamat IP selama 96 menit.
 
 ## **Penyelesaian Soal Nomor 5**
+```bash
+#Menambahkan konfigurasi ini pada subnet switch 3 
+default-lease-time 180;
+max-lease-time 5760;
+
+#Menambahkan konfigurasi ini pada subnet switch 4
+default-lease-time 720;
+max-lease-time 5760;
+```
+Hasil DHCP
+
+![Alt text](image-1.png)
+
+![Alt text](image-2.png)
 
 ## **Soal Nomor 6**
 Berjalannya waktu, petualang diminta untuk melakukan deployment. Pada masing-masing worker PHP, lakukan konfigurasi virtual host untuk website [berikut](https://drive.google.com/file/d/1ViSkRq7SmwZgdK64eRbr5Fm1EGCTPrU1/view) dengan menggunakan php 7.3.
