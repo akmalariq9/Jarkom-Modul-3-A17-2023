@@ -138,6 +138,9 @@ zone "channel.a17.com" {
         file "/etc/bind/jarkom/channel.a17.com";
 };
 ```
+![Alt text](image-3.png)
+
+![Alt text](image-4.png)
 ## **Soal Nomor 2**
 Semua Client harus menggunakan konfigurasi dari DHCP Server. Client yang melalui Switch3 mendapatkan range IP dari [prefix IP].3.16 - [prefix IP].3.32 dan [prefix IP].3.64 - [prefix IP].3.80.
 
