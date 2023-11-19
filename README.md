@@ -26,7 +26,7 @@ Berikut adalah dokumentasi yang berisi source code dari tiap soal dan penjelasan
 Setelah mengalahkan Demon King, perjalanan berlanjut. Kali ini, kalian diminta untuk melakukan register domain berupa riegel.canyon.yyy.com untuk worker Laravel dan granz.channel.yyy.com untuk worker PHP mengarah pada worker yang memiliki IP [prefix IP].x.1. Lakukan konfigurasi sesuai dengan peta yang sudah diberikan. 
 
 ## **Penyelesaian Soal Nomor 0 dan 1**
-![Alt text](image.png)
+![Nomor 12](https://media.discordapp.net/attachments/1150687865420906517/1175814014572429402/img1.png?ex=656c9922&is=655a2422&hm=b394308893e8ff51f2dafd92fbc1a796406470c916a700d072286bff7764fb47&=&width=883&height=701)
 
 Konfigurasi Interface setiap node
 ```bash
@@ -95,8 +95,9 @@ iface eth0 inet dhcp
 hwaddress ether ea:5e:ce:cb:22: #Hanya untuk worker
 ```
 
-Lalu, melakukan konfigurasi DNS seperti biasa pada DNS SERVER.
-```
+Lalu, melakukan konfigurasi DNS seperti biasa pada DNS Server.
+
+```bash
 konfigurasi channel.a17.com
 ;
 ; BIND data file for local loopback interface
@@ -115,7 +116,8 @@ granz   IN      A       192.177.3.1 #IP PHP Worker
 @       IN      AAAA    ::1
 
 ```
-```
+
+```bash
 konfigurasi canyon.a17.com
 ;
 ; BIND data file for local loopback interface
@@ -146,9 +148,10 @@ zone "channel.a17.com" {
         file "/etc/bind/jarkom/channel.a17.com";
 };
 ```
-![Alt text](image-3.png)
+![Riegel Canyon](https://cdn.discordapp.com/attachments/1150687865420906517/1175816465849528360/image.png?ex=656c9b6b&is=655a266b&hm=aa4daca80f2efc05a56a0e04c2847e8188789fb2487dae5a4489bd37b8e23c43&)
 
-![Alt text](image-4.png)
+![Riegel Canyon](https://cdn.discordapp.com/attachments/1150687865420906517/1175816508824363108/image.png?ex=656c9b75&is=655a2675&hm=64c15ce8b36cf594521e346d82a5a3649dffaf25a4e72ad414971097f37174b4&)
+
 ## **Soal Nomor 2**
 Semua Client harus menggunakan konfigurasi dari DHCP Server. Client yang melalui Switch3 mendapatkan range IP dari [prefix IP].3.16 - [prefix IP].3.32 dan [prefix IP].3.64 - [prefix IP].3.80.
 
@@ -202,6 +205,9 @@ subnet 192.177.4.0 netmask 255.255.255.0 {
     max-lease-time 5760;
 }
 ```
+Dapat dilihat bahwa terdapat pergantian IP pada client seperti pada gambar berikut:
+
+![3](https://cdn.discordapp.com/attachments/1150687865420906517/1175817589889433630/image.png?ex=656c9c77&is=655a2777&hm=d88a47afda944bd3249cfd8a8d49ea0d1340e5175fded250a9b6254f8299e819&)
 
 ## **Soal Nomor 4**
 Client mendapatkan DNS dari Heiter dan dapat terhubung dengan internet melalui DNS tersebut.
@@ -224,6 +230,10 @@ options {
 };
 ```
 
+Untuk melakukan testing apakah _client_ sudah tersambung ke internet dapat dilakukan dengan ping google.com seperti pada gambar dibawah:
+
+![4](https://cdn.discordapp.com/attachments/1150687865420906517/1175817951891431514/image.png?ex=656c9ccd&is=655a27cd&hm=1ef103290532bc1a8920beb2086c6aa725cc6ec9a61472a3ae5f500e2dac2b3f&)
+
 ## **Soal Nomor 5**
 Lama waktu DHCP server meminjamkan alamat IP kepada Client yang melalui Switch3 selama 3 menit sedangkan pada client yang melalui Switch4 selama 12 menit. Dengan waktu maksimal dialokasikan untuk peminjaman alamat IP selama 96 menit.
 
@@ -239,13 +249,9 @@ max-lease-time 5760;
 ```
 Hasil DHCP
 
-![Alt text](image-1.png)
+![5-1](https://media.discordapp.net/attachments/1150687865420906517/1175814013830037564/img4.png?ex=656c9922&is=655a2422&hm=473a96e5b4838ccf8dc6a671caecec1b8ccfea679cef0c8a1ec82d34bf74e634&=&width=986&height=320)
 
-![Alt text](image-2.png)
-
-![image](https://github.com/akmalariq9/Jarkom-Modul-3-A17-2023/assets/91018876/3afb62d2-e15e-4cc5-a240-82b4875f6645)
-
-![image](https://github.com/akmalariq9/Jarkom-Modul-3-A17-2023/assets/91018876/9f74fb6f-a06e-4b57-af19-bd41965a800a)
+![5-2](https://media.discordapp.net/attachments/1150687865420906517/1175814014056542319/img3.png?ex=656c9922&is=655a2422&hm=6cc898dffb71339266d71a87c6440be192f12f239354e4b31f56e915355a514b&=&width=1037&height=330)
 
 
 ## **Soal Nomor 6**
@@ -418,6 +424,7 @@ Untuk menyelesaikan nomor 10 hanya perlu dilakukan penambahan pada file kongfigu
         }
  }
 ```
+
 Setelah melakukan kongfigurasi file nginx, maka dapat dijalankan command berikut untuk membuat direktori baru dan membuat file `.htpasswd`.
 
 ```bash
@@ -454,7 +461,17 @@ Selanjutnya LB ini hanya boleh diakses oleh client dengan IP [Prefix IP].3.69, [
 Untuk menyelesaikan soal nomor 12, hal yang perlu dilakukan adalah menambahkan bagian berikut pada kongfigurasi nginx di load-balancer:
 
 ```bash
+location / {
+                proxy_pass http://myweb;
+                auth_basic "Administrator's Area";
+                auth_basic_user_file /etc/nginx/rahasiakita/.htpasswd;
 
+                allow 192.177.3.69;
+                allow 192.177.3.70;
+                allow 192.177.4.167;
+                allow 192.177.4.168;
+                deny all;
+        }
 ```
 
 Sehingga outputnya akan menjadi seperti ini:
