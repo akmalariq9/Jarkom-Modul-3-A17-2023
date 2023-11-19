@@ -323,7 +323,7 @@ server {
 
 Berikut adalah output yang ditampilkan saat dilakukan lynx atau curl menuju alamat IP dari tiap-tiap worker: <br>
 
-[Nomor6](Link)
+![Nomor6](https://cdn.discordapp.com/attachments/1150687865420906517/1175821090908545054/image.png?ex=656c9fb9&is=655a2ab9&hm=83a1b799011b450dc2178a1d910f5eb866c58db985192f19e6d916b53f90275f&)
 
 ## **Soal Nomor 7**
 Kepala suku dari Bredt Region memberikan resource server sebagai berikut: <br>
