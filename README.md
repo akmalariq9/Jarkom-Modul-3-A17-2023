@@ -11,11 +11,11 @@ Berikut adalah Repository dari Kelompok A17 untuk pengerjaan Praktikum Modul 3 J
 | Akmal Ariq Romadhon       | 5025211188 | Jaringan Komputer A  |
 
 
-# **Gremoire (Laporan)**
+# **Grimoire (Laporan)**
 
-Gremoire atau laporan mengenai hasil testing dari kelompok A17 dapat diakses melalui link [berikut](https://its.id/m/Jarkom-Kelompok-A17-Modul-3) atau melalui url berikut: https://its.id/m/Jarkom-Kelompok-A17-Modul-3. <br> 
+Grimoire atau laporan mengenai hasil testing dari kelompok A17 dapat diakses melalui link [berikut](https://its.id/m/Jarkom-Kelompok-A17-Modul-3) atau melalui url berikut: https://its.id/m/Jarkom-Kelompok-A17-Modul-3. <br> 
 
-Dalam Gremoire tersebut terdapat perbandingan beberapa algoritma dan hasil testing saat client melakukan request tertentu.
+Dalam grimoire tersebut terdapat perbandingan beberapa algoritma dan hasil testing saat client melakukan request tertentu.
 
 # **Dokumentasi dan Penjelasan Soal**
 <div align=justify>
@@ -383,7 +383,7 @@ Untuk melakukan _testing_  200 request dengan 10 _request per second_, digunakan
 
 ![Nomor8GH](https://media.discordapp.net/attachments/1150687865420906517/1174025958559338506/image.png?ex=656617e0&is=6553a2e0&hm=a452d392afd4bcf9c282a76f85c669aa31e8d56bf07ed11f1eb18bfad9e46017&=&width=605&height=700)
 
-Untuk grafik serta penjelasan dari masing-masing algoritma dapat dilihat pada gremoire yang telah dibuat sebelumnya. 
+Untuk grafik serta penjelasan dari masing-masing algoritma dapat dilihat pada grimoire yang telah dibuat sebelumnya. 
 
 ## **Soal Nomor 9**
 Dengan menggunakan algoritma Round Robin, lakukan testing dengan menggunakan 3 worker, 2 worker, dan 1 worker sebanyak 100 request dengan 10 request/second, kemudian tambahkan grafiknya pada grimoire.
@@ -556,7 +556,7 @@ Untuk testingnya dapat dilakukan dengan melakukan lynx ke salah satu worker sepe
 Riegel Channel memiliki beberapa endpoint yang harus ditesting sebanyak 100 request dengan 10 request/second. Tambahkan response dan hasil testing pada grimoire untuk POST /auth/register.
 
 ## **Penyelesaian Soal Nomor 15**
-Untuk soal nomor 15 dapat dilakukan dengan menembak endpoint ke beberapa worker. Untuk hasil testing dan perbandingan dapat dilihat pada Gremoire, sedangkan untuk contoh response yang dihasilkan adalah sebagai berikut:
+Untuk soal nomor 15 dapat dilakukan dengan menembak endpoint ke beberapa worker. Untuk hasil testing dan perbandingan dapat dilihat pada grimoire, sedangkan untuk contoh response yang dihasilkan adalah sebagai berikut:
 
 ![15](https://cdn.discordapp.com/attachments/1150687865420906517/1175808999053066270/image.png?ex=656c9476&is=655a1f76&hm=80c7dd7af160a2eec52a19ccf2325320f7aa31e33ad21b4680acc9bcd16828c9&)
 
@@ -565,7 +565,7 @@ Riegel Channel memiliki beberapa endpoint yang harus ditesting sebanyak 100 requ
 
 ## **Penyelesaian Soal Nomor 16** 
 
-Untuk soal nomor 15 dapat dilakukan dengan menembak endpoint ke beberapa worker. Untuk hasil testing dan perbandingan dapat dilihat pada Gremoire, sedangkan untuk contoh response yang dihasilkan adalah sebagai berikut:
+Untuk soal nomor 15 dapat dilakukan dengan menembak endpoint ke beberapa worker. Untuk hasil testing dan perbandingan dapat dilihat pada grimoire, sedangkan untuk contoh response yang dihasilkan adalah sebagai berikut:
 
 ![15](https://cdn.discordapp.com/attachments/1150687865420906517/1175808999053066270/image.png?ex=656c9476&is=655a1f76&hm=80c7dd7af160a2eec52a19ccf2325320f7aa31e33ad21b4680acc9bcd16828c9&)
 
@@ -573,7 +573,7 @@ Untuk soal nomor 15 dapat dilakukan dengan menembak endpoint ke beberapa worker.
 Riegel Channel memiliki beberapa endpoint yang harus ditesting sebanyak 100 request dengan 10 request/second. Tambahkan response dan hasil testing pada grimoire untuk GET /me.
 ## **Penyelesaian Soal Nomor 17**
 
-Untuk soal nomor 15 dapat dilakukan dengan menembak endpoint ke beberapa worker. Untuk hasil testing dan perbandingan dapat dilihat pada Gremoire, sedangkan untuk contoh response yang dihasilkan adalah sebagai berikut:
+Untuk soal nomor 15 dapat dilakukan dengan menembak endpoint ke beberapa worker. Untuk hasil testing dan perbandingan dapat dilihat pada grimoire, sedangkan untuk contoh response yang dihasilkan adalah sebagai berikut:
 
 ![17](https://cdn.discordapp.com/attachments/1150687865420906517/1175809357263425626/image.png?ex=656c94cc&is=655a1fcc&hm=d4abd821e137519730fe6599399421a48f9372b9761ed2cba6f41ab7128dc436&)
 
@@ -620,7 +620,7 @@ Untuk menyelesaikan soal nomor 19, maka dapat dibuat template didalam root folde
 
 ![19](https://cdn.discordapp.com/attachments/1150687865420906517/1175810509602291903/image.png?ex=656c95de&is=655a20de&hm=195911c8e6e3fc07db2f5660c30168f9de42be1e69694908ed58d589adeeabee&)
 
-Kemudian lakukan hal yang sama di tiap worker, dan lakukan testing pada client. Untuk hasil lengkap percobaan dapat dilihat pada gremoire dari kelompok A17.
+Kemudian lakukan hal yang sama di tiap worker, dan lakukan testing pada client. Untuk hasil lengkap percobaan dapat dilihat pada grimoire dari kelompok A17.
 
 ## **Soal Nomor 20**
 Nampaknya hanya menggunakan PHP-FPM tidak cukup untuk meningkatkan performa dari worker maka implementasikan Least-Conn pada Eisen. Untuk testing kinerja dari worker tersebut dilakukan sebanyak 100 request dengan 10 request/second. 
@@ -647,7 +647,7 @@ upstream mynode  {
  }
 ```
 
-Kemudian lakukan testing pada client. Untuk hasil lengkap testing dapat dilihat pada Gremoire kelompok A17.
+Kemudian lakukan testing pada client. Untuk hasil lengkap testing dapat dilihat pada grimoire kelompok A17.
 
 # **Kendala Saat Pengerjaan**
 
